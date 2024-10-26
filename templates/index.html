@@ -4,121 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Client-Server Interaction</title>
-    <style>
-      /* Reset and basic styles */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f7f9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        color: #333;
-      }
-
-      .container {
-        text-align: center;
-        padding: 2rem;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        max-width: 400px;
-      }
-
-      h1 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-        color: #007bff;
-      }
-
-      input[type="text"] {
-        width: 100%;
-        padding: 0.8rem;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        outline: none;
-      }
-
-      button {
-        width: 100%;
-        padding: 0.8rem;
-        font-size: 1rem;
-        font-weight: bold;
-        color: #fff;
-        background-color: #007bff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      button:hover {
-        background-color: #0056b3;
-      }
-
-      #responseOutput {
-        margin-top: 1.5rem;
-        font-size: 1rem;
-        color: #333;
-      }
-
-      /* Responsive styling */
-      @media (max-width: 600px) {
-        h1 {
-          font-size: 1.5rem;
-        }
-
-        input[type="text"],
-        button {
-          font-size: 0.9rem;
-        }
-      }
-    </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Client-Server Interaction</h1>
-      <input type="text" id="messageInput" placeholder="Type a message" />
-      <button id="sendMessage">Send Message</button>
-      <p id="responseOutput"></p>
-    </div>
+    <h1>Client-Server Interaction</h1>
+    <input type="text" id="messageInput" placeholder="Type a message" />
+    <button id="sendMessage">Send Message</button>
+    <p id="responseOutput"></p>
 
     <script>
       document
         .getElementById("sendMessage")
         .addEventListener("click", async () => {
-          const message = document.getElementById("messageInput").value;
+          const message = document.getElementById("messageInput").value; // Get input value
           const responseOutput = document.getElementById("responseOutput");
 
+          // Send a POST request to the server
           try {
             const response = await fetch(
               "https://web-production-4c451.up.railway.app/api/message",
               {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json",
+                  "Content-Type": "application/json", // Specify content type as JSON
                 },
-                body: JSON.stringify({ message }),
+                body: JSON.stringify({ message }), // Send the message as JSON
               }
             );
 
-            if (response.ok) {
-              const data = await response.json();
-              responseOutput.textContent = `Server: ${data.response}`;
-            } else {
-              responseOutput.textContent = "Error: Server did not respond.";
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
             }
+
+            const data = await response.json(); // Parse the response JSON
+            responseOutput.textContent = data.response; // Display the response
           } catch (error) {
-            responseOutput.textContent = "Network Error. Please try again.";
+            responseOutput.textContent = `Error: ${error.message}`; // Display error if any
           }
         });
     </script>
