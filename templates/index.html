@@ -15,19 +15,17 @@
       document
         .getElementById("sendMessage")
         .addEventListener("click", async () => {
-          const message = document.getElementById("messageInput").value; // Get input value
+          const message = document.getElementById("messageInput").value;
           const responseOutput = document.getElementById("responseOutput");
-
-          // Send a POST request to the server
           try {
             const response = await fetch(
               "https://web-production-4c451.up.railway.app/api/message",
               {
                 method: "POST",
                 headers: {
-                  "Content-Type": "application/json", // Specify content type as JSON
+                  "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ message }), // Send the message as JSON
+                body: JSON.stringify({ message }),
               }
             );
 
@@ -35,10 +33,11 @@
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
-            const data = await response.json(); // Parse the response JSON
-            responseOutput.textContent = data.response; // Display the response
+            const data = await response.json();
+            responseOutput.textContent = data.response;
           } catch (error) {
-            responseOutput.textContent = `Error: ${error.message}`; // Display error if any
+            console.error("Error:", error.message); // Log error details
+            responseOutput.textContent = `Error: ${error.message}`;
           }
         });
     </script>
