@@ -11,6 +11,7 @@ def home():
 def get_message():
     if request.is_json:  # Check if the incoming request is JSON
         data = request.get_json()
+        print(f"Received data: {data}")
         message = data.get('message', '')
         response = {'response': f"You sent: {message}"}
         return jsonify(response)
