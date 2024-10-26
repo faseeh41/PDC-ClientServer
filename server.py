@@ -1,11 +1,11 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Hello, World!"
+    return render_template('index.html')  # Serve the HTML file
 
 # New route to handle POST requests
 @app.route('/api/message', methods=['POST'])
