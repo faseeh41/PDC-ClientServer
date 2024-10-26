@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client-Server Interaction</title>
+  </head>
+  <body>
+    <h1>Client-Server Interaction</h1>
+    <input type="text" id="messageInput" placeholder="Type a message" />
+    <button id="sendMessage">Send Message</button>
+    <p id="responseOutput"></p>
+
+    <script>
+      document
+        .getElementById("sendMessage")
+        .addEventListener("click", async () => {
+          const message = document.getElementById("messageInput").value; // Get input value
+          const responseOutput = document.getElementById("responseOutput");
+
+          // Send a POST request to the server
+          const response = await fetch(
+            "https://your-app-name.railway.app/api/message",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ message }), // Send the message as JSON
+            }
+          );
+
+          const data = await response.json(); // Parse the response JSON
+          responseOutput.textContent = data.response; // Display the response
+        });
+    </script>
+  </body>
+</html>

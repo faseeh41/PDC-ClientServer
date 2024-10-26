@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -7,7 +7,14 @@ app = Flask(__name__)
 def home():
     return "Hello, World!"
 
+# New route to handle POST requests
+@app.route('/api/message', methods=['POST'])
+def get_message():
+    data = request.get_json()  # Get JSON data from the request
+    message = data.get('message', '')  # Extract 'message' from the data
+    response = {'response': f"You sent: {message}"}  # Create a response
+    return jsonify(response)  # Return response as JSON
+
 if __name__ == '__main__':
-    # Get the port number from the environment variable
-    port = int(os.environ.get("PORT", 5000))  # Default to 5000 if not set
-    app.run(host='0.0.0.0', port=port)  # Listen on all interfaces
+    port = int(os.environ.get("PORT", 5000))  # Get the port
+    app.run(host='0.0.0.0', port=port)  # Run the app
