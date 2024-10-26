@@ -4,12 +4,83 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Client-Server Interaction</title>
+    <style>
+      /* Base styling */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Center content */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f4f4f9;
+      }
+
+      /* Container styling */
+      .container {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        text-align: center;
+      }
+
+      /* Heading styling */
+      h1 {
+        color: #333;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Input field styling */
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      /* Button styling */
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      /* Response message styling */
+      p {
+        margin-top: 1rem;
+        color: #555;
+        font-size: 1rem;
+      }
+    </style>
   </head>
   <body>
-    <h1>Client-Server Interaction</h1>
-    <input type="text" id="messageInput" placeholder="Type a message" />
-    <button id="sendMessage">Send Message</button>
-    <p id="responseOutput"></p>
+    <div class="container">
+      <h1>Client-Server Interaction</h1>
+      <input type="text" id="messageInput" placeholder="Type a message" />
+      <button id="sendMessage">Send Message</button>
+      <p id="responseOutput"></p>
+    </div>
 
     <script>
       document
