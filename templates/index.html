@@ -10,7 +10,7 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-family: Arial, sans-serif;
+        font-family: "Courier New", Courier, monospace;
       }
 
       /* Center content */
@@ -19,24 +19,27 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background-color: #f4f4f9;
+        background-color: #0d0d0d;
+        color: #00ff00;
       }
 
       /* Container styling */
       .container {
-        background-color: #fff;
+        background-color: #1a1a1a;
         padding: 2rem;
         border-radius: 8px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 4px 15px rgba(0, 255, 0, 0.2);
         max-width: 400px;
+        width: 90%;
         text-align: center;
       }
 
       /* Heading styling */
       h1 {
-        color: #333;
-        font-size: 1.5rem;
+        color: #00ff00;
+        font-size: 1.8rem;
         margin-bottom: 1.5rem;
+        text-shadow: 0px 0px 8px rgba(0, 255, 0, 0.7);
       }
 
       /* Input field styling */
@@ -44,33 +47,39 @@
         width: 100%;
         padding: 10px;
         margin-bottom: 1rem;
-        border: 1px solid #ccc;
+        border: 1px solid #00ff00;
         border-radius: 5px;
         font-size: 1rem;
+        background-color: #0d0d0d;
+        color: #00ff00;
+        text-shadow: 0px 0px 5px rgba(0, 255, 0, 0.8);
       }
 
       /* Button styling */
       button {
         padding: 10px 20px;
-        border: none;
+        border: 1px solid #00ff00;
         border-radius: 5px;
         font-size: 1rem;
-        background-color: #4caf50;
-        color: #fff;
+        background-color: #0d0d0d;
+        color: #00ff00;
         cursor: pointer;
-        transition: background-color 0.3s ease;
         width: 100%;
+        transition: 0.3s ease;
+        text-shadow: 0px 0px 5px rgba(0, 255, 0, 0.8);
       }
 
       button:hover {
-        background-color: #45a049;
+        background-color: #00ff00;
+        color: #0d0d0d;
       }
 
       /* Response message styling */
       p {
         margin-top: 1rem;
-        color: #555;
+        color: #00ff00;
         font-size: 1rem;
+        text-shadow: 0px 0px 5px rgba(0, 255, 0, 0.8);
       }
     </style>
   </head>
@@ -107,7 +116,7 @@
             const data = await response.json();
             responseOutput.textContent = data.response;
           } catch (error) {
-            console.error("Error:", error.message); // Log error details
+            console.error("Error:", error.message);
             responseOutput.textContent = `Error: ${error.message}`;
           }
         });
