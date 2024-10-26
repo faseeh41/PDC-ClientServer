@@ -1,26 +1,13 @@
-import socket
-import threading
+import os
+from flask import Flask
 
-def handle_client(client_socket):
-    while True:
-        message = client_socket.recv(1024)
-        if not message:
-            break  # Connection closed
-        print(f"Received: {message.decode()}")
-        client_socket.sendall(message)  # Echo the message back to the client
-    client_socket.close()
+app = Flask(__name__)
 
-def start_server(host='127.0.0.1', port=65432):
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind((host, port))
-    server_socket.listen(5)  # Listen for up to 5 connections
-    print(f"Server listening on {host}:{port}")
+@app.route('/')
+def home():
+    return "Hello, World!"
 
-    while True:
-        client_socket, addr = server_socket.accept()
-        print(f"Accepted connection from {addr}")
-        client_handler = threading.Thread(target=handle_client, args=(client_socket,))
-        client_handler.start()
-
-if __name__ == "__main__":
-    start_server()
+if __name__ == '__main__':
+    # Get the port number from the environment variable
+    port = int(os.environ.get("PORT", 5000))  # Default to 5000 if not set
+    app.run(host='0.0.0.0', port=port)  # Listen on all interfaces
